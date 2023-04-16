@@ -1,0 +1,36 @@
+@model MyApp.Web.Models.Users.UserViewModel
+
+@{
+    ViewBag.Title = "A concrete user";
+}
+
+<table class="table">
+    <tr>
+    <th>
+        @Html.DisplayNameFor(model => model.Forename)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Surname)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.IsActive)
+    </th>
+    <tr>
+        <td>
+            @Model.Forename
+        </td>
+        <td>
+            @Model.Surname
+        </td>
+        <td>
+            @if (Model.IsActive)
+            {
+                <p>Yes</p>
+            }
+            else
+            {
+                <p>No</p>
+            }
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,51 @@
+@model IEnumerable<MyApp.Models.User>
+@{
+    ViewBag.Title = "List of users";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create a new user", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Forename)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Forename, "Details", new { id = item.Id })
+            </td>
+            <td>
+                @item.Surname
+            </td>
+            <td>
+                @if (item.IsActive)
+                {
+                    <p>Yes</p>
+                }
+                else
+                {
+                    <p>No</p>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "viewDialog", data_dialog_title = "DELETE PRODUCT" })
+            </td>
+        </tr>
+    }
+
+</table>
