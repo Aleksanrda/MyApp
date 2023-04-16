@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MyApp.Data;
 using MyApp.Models;
 using MyApp.Services.Domain.Implementations.Base;
@@ -18,7 +19,7 @@ namespace MyApp.Services.Domain.Implementations
         /// <returns></returns>
         public IEnumerable<User> FilterByActive(bool isActive)
         {
-            throw new NotImplementedException();
+            return GetAll().Where(u => u.IsActive == isActive);
         }
     }
 }

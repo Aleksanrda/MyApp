@@ -1,9 +1,22 @@
 @model IEnumerable<MyApp.Models.User>
+
 @{
     ViewBag.Title = "List of users";
 }
 
 <h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Index", "Users", FormMethod.Get))
+{
+    <div>
+        <span>Filter by:</span>
+        @Html.DropDownList("isActive", new SelectList(new Dictionary<string, string>
+        {
+            { "true", "Active users" },
+            { "false", "Non-active users" }
+        }, "Key", "Value", ViewBag.IsActive), "All users", new { onchange = "this.form.submit();" })
+    </div>
+}
 
 <p>
     @Html.ActionLink("Create a new user", "Create")
@@ -18,7 +31,9 @@
             @Html.DisplayNameFor(model => model.Surname)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsActive)
+            Is the user active?
+        </th>
+        <th>
         </th>
     </tr>
 
@@ -43,7 +58,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "viewDialog", data_dialog_title = "DELETE PRODUCT" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "viewDialog", data_dialog_title = "DELETE USER" })
             </td>
         </tr>
     }

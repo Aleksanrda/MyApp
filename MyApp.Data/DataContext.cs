@@ -15,7 +15,9 @@ namespace MyApp.Data
                 new User { Id = 1, Forename = "Grant", Surname = "Cooper", IsActive = true },
                 new User { Id = 2, Forename = "Tom", Surname = "Gathercole", IsActive = true },
                 new User { Id = 3, Forename = "Mark", Surname = "Edmondson", IsActive = true },
-                new User { Id = 4, Forename = "Graham", Surname = "Clark", IsActive = true }
+                new User { Id = 4, Forename = "Graham", Surname = "Clark", IsActive = true },
+                new User { Id = 4, Forename = "Nick", Surname = "Lewis", IsActive = false },
+                new User { Id = 4, Forename = "James", Surname = "Young", IsActive = false },
             };
         }
 

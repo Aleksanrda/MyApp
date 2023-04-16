@@ -18,15 +18,28 @@ public class UsersController : Controller
     }
     
     [HttpGet]
-    public IActionResult Index()
+    public IActionResult Index(bool? isActive = null)
     {
-        var users = _serviceFactory.UserService.GetAll();
+        IEnumerable<User> users;
         
+        if (isActive.HasValue)
+        {
+            users = isActive == true
+                ? _serviceFactory.UserService.FilterByActive(true)
+                : _serviceFactory.UserService.FilterByActive(false);
+        }
+        else
+        {
+            users = _serviceFactory.UserService.GetAll();
+        }
+
         if (users == null)
         {
             return View("NotFound");
         }
         
+        ViewBag.IsActive = isActive;
+
         return View(users);
     }
     
