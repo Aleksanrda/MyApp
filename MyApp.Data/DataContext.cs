@@ -12,20 +12,43 @@ namespace MyApp.Data
         {
             Users = new List<User>
             {
-                new User { Id = 1, Forename = "Grant", Surname = "Cooper", IsActive = true },
-                new User { Id = 2, Forename = "Tom", Surname = "Gathercole", IsActive = true },
-                new User { Id = 3, Forename = "Mark", Surname = "Edmondson", IsActive = true },
-                new User { Id = 4, Forename = "Graham", Surname = "Clark", IsActive = true },
-                new User { Id = 4, Forename = "Nick", Surname = "Lewis", IsActive = false },
-                new User { Id = 4, Forename = "James", Surname = "Young", IsActive = false },
+                new User
+                {
+                    Id = 1, Forename = "Grant", Surname = "Cooper", IsActive = true,
+                    DateOfBirth = new DateTime(1990, 5, 12)
+                },
+                new User
+                {
+                    Id = 2, Forename = "Tom", Surname = "Gathercole", IsActive = true,
+                    DateOfBirth = new DateTime(1999, 4, 24)
+                },
+                new User
+                {
+                    Id = 3, Forename = "Mark", Surname = "Edmondson", IsActive = true,
+                    DateOfBirth = new DateTime(2000, 3, 31)
+                },
+                new User
+                {
+                    Id = 4, Forename = "Graham", Surname = "Clark", IsActive = true,
+                    DateOfBirth = new DateTime(1995, 2, 1)
+                },
+                new User
+                {
+                    Id = 4, Forename = "Nick", Surname = "Lewis", IsActive = false,
+                    DateOfBirth = new DateTime(1991, 2, 11)
+                },
+                new User
+                {
+                    Id = 4, Forename = "James", Surname = "Young", IsActive = false,
+                    DateOfBirth = new DateTime(1993, 12, 9)
+                },
             };
         }
 
         private List<User> Users { get; set; }
 
 
-
-        public List<TEntity> Set<TEntity>() where TEntity : class 
+        public List<TEntity> Set<TEntity>() where TEntity : class
         {
             var propertyInfo = PropertyInfos.FirstOrDefault(p => p.PropertyType == typeof(List<TEntity>));
 
@@ -43,17 +66,17 @@ namespace MyApp.Data
 
 
         private IEnumerable<PropertyInfo> _propertyInfos;
+
         private IEnumerable<PropertyInfo> PropertyInfos
         {
             get
             {
                 return _propertyInfos ??
-                        (_propertyInfos = GetType()
-                                            .GetProperties(BindingFlags.Instance | BindingFlags.NonPublic)
-                                            .Where(p => p.PropertyType.IsGenericType &&
-                                                        p.PropertyType.GetGenericTypeDefinition() == typeof(List<>)));
+                       (_propertyInfos = GetType()
+                           .GetProperties(BindingFlags.Instance | BindingFlags.NonPublic)
+                           .Where(p => p.PropertyType.IsGenericType &&
+                                       p.PropertyType.GetGenericTypeDefinition() == typeof(List<>)));
             }
         }
-
     }
 }
