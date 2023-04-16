@@ -7,4 +7,6 @@ public class UserViewModel
     public string? Surname { get; set; }
 
     public bool IsActive { get; set; }
+    
+    public DateTime DateOfBirth { get; set; }
 }

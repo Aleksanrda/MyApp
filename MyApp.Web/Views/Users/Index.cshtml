@@ -31,6 +31,9 @@
             @Html.DisplayNameFor(model => model.Surname)
         </th>
         <th>
+            Date of birth
+        </th>
+        <th>
             Is the user active?
         </th>
         <th>
@@ -45,6 +48,9 @@
             </td>
             <td>
                 @item.Surname
+            </td>
+            <td>
+                @item.DateOfBirth.ToString("dd/MM/yyyy");
             </td>
             <td>
                 @if (item.IsActive)
