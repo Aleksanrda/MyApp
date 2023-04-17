@@ -1,5 +1,5 @@
 using MyApp.Web;
-using AutoMapper;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +8,18 @@ builder.Services.AddControllersWithViews();
 builder.Services.RegisterMyAppServices();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
+// Create a LoggerFactory object
+var loggerFactory = LoggerFactory.Create(builder =>
+{
+    builder.AddFile("Logs/Log.txt");
+});
+
+builder.Services.AddSingleton(loggerFactory);
+
 var app = builder.Build();
+
+var logger = loggerFactory.CreateLogger("MyApp");
+logger.LogInformation("MyApp application started.");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
