@@ -34,12 +34,12 @@ namespace MyApp.Data
                 },
                 new User
                 {
-                    Id = 4, Forename = "Nick", Surname = "Lewis", IsActive = false,
+                    Id = 5, Forename = "Nick", Surname = "Lewis", IsActive = false,
                     DateOfBirth = new DateTime(1991, 2, 11)
                 },
                 new User
                 {
-                    Id = 4, Forename = "James", Surname = "Young", IsActive = false,
+                    Id = 6, Forename = "James", Surname = "Young", IsActive = false,
                     DateOfBirth = new DateTime(1993, 12, 9)
                 },
             };

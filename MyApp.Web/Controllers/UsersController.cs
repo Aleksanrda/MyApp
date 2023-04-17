@@ -37,10 +37,12 @@ public class UsersController : Controller
         {
             return View("NotFound");
         }
+
+        var userViewModels = _mapper.Map<IEnumerable<UserViewModel>>(users);
         
         ViewBag.IsActive = isActive;
 
-        return View(users);
+        return View(userViewModels);
     }
     
     [HttpGet]
@@ -65,12 +67,17 @@ public class UsersController : Controller
     }
 
     [HttpPost]
-    public ActionResult Create(User user)
+    [ValidateAntiForgeryToken]
+    public ActionResult Create(CreateUserViewModel createUserViewModel)
     {
-        var users = _serviceFactory.UserService.Create(user);
-            
         if (ModelState.IsValid)
-        { 
+        {
+            var user = _mapper.Map<User>(createUserViewModel);
+                
+            var createdUser = _serviceFactory.UserService.Create(user);
+        
+            ViewData["Created"] = "User is successfully created";
+            
             return RedirectToAction("Details", new { id = user.Id });
         }
 
@@ -87,23 +94,26 @@ public class UsersController : Controller
             return View("NotFound");
         }
 
-        return View(model);
+        var editUserViewModel = _mapper.Map<UserViewModel>(model);
+
+        return View(editUserViewModel);
     }
 
     [HttpPost]
-    public ActionResult Edit(User user)
+    [ValidateAntiForgeryToken]
+    public ActionResult Edit(UserViewModel userViewModel)
     {
         if (ModelState.IsValid)
         {
+            var user = _mapper.Map<User>(userViewModel);
             var currentProduct = _serviceFactory.UserService.Update(user);
 
             return RedirectToAction("Details", new { id = user.Id });
         }
 
-        return View(user);
+        return View(userViewModel);
     }
-
-    [HttpGet]
+    
     public ActionResult Delete(int id)
     {
         var model = _serviceFactory.UserService.GetById(id);
@@ -113,13 +123,21 @@ public class UsersController : Controller
             return View("NotFound");
         }
 
-        return PartialView(model);
+        var userViewModel = _mapper.Map<UserViewModel>(model); 
+
+        return View(userViewModel);
     }
 
-    [HttpPost]
-    public ActionResult Delete(int id, FormCollection form)
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public ActionResult DeleteConfirmed(int id)
     {
         var user = _serviceFactory.UserService.GetById(id);
+        
+        if (user == null)
+        {
+            return View("NotFound");
+        }
         
         _serviceFactory.UserService.Delete(user);
 

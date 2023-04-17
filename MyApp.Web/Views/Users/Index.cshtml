@@ -1,4 +1,4 @@
-@model IEnumerable<MyApp.Models.User>
+@model IEnumerable<MyApp.Web.Models.Users.UserViewModel>
 
 @{
     ViewBag.Title = "List of users";
@@ -50,7 +50,7 @@
                 @item.Surname
             </td>
             <td>
-                @item.DateOfBirth.ToString("dd/MM/yyyy");
+                @item.DateOfBirth.ToString("dd/MM/yyyy")
             </td>
             <td>
                 @if (item.IsActive)
@@ -64,7 +64,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "viewDialog", data_dialog_title = "DELETE USER" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
