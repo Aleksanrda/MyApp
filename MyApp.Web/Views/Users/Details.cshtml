@@ -16,7 +16,7 @@
         Date of birth
     </th>
     <th>
-        @Html.DisplayNameFor(model => model.IsActive)
+        Status
     </th>
     <tr>
         <td>
@@ -31,11 +31,11 @@
         <td>
             @if (Model.IsActive)
             {
-                <p>Yes</p>
+                <p>Active</p>
             }
             else
             {
-                <p>No</p>
+                <p>Non-Active</p>
             }
         </td>
     </tr>

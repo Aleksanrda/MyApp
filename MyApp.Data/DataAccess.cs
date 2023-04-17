@@ -55,15 +55,13 @@ namespace MyApp.Data
 
         public void Delete<TEntity>(TEntity entity) where TEntity : ModelBase
         {
-            var originalEtity = GetAll<TEntity>().FirstOrDefault(p => p.Id.Equals(entity.Id));
-
-            if (originalEtity == null)
+            if (entity == null)
             {
                 throw new NullReferenceException("The entity does not exist in the data store");
             }
 
             // remove the original entity
-            _dataContext.Set<TEntity>().Remove(originalEtity);
+            _dataContext.Set<TEntity>().Remove(entity);
         }
     }
 }
